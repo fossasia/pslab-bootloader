@@ -1,0 +1,78 @@
+Microchip Technology Inc, v1.60 (B)
+
+Tool Name:
+  /opt/microchip/xc16/v1.60/bin/bin/../bin/elf-ld
+
+Command:
+  -p24EP256GP204 \
+  --mdfp=/opt/microchip/mplabx/v5.40/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.2.58/xc16 \
+  -o \
+  dist/default/production/TEZBL.X.production.elf \
+  -L/opt/microchip/xc16/v1.60/bin/bin/.. \
+  -L/opt/microchip/mplabx/v5.40/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.2.58/xc16/bin/../support/PIC24E/gld \
+  -L/opt/microchip/mplabx/v5.40/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.2.58/xc16/bin/../support/dsPIC33E/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../lib \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/PIC24E/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/PIC24F/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/PIC24H/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/dsPIC30F/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/dsPIC33C/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/dsPIC33E/gld \
+  -L/opt/microchip/xc16/v1.60/bin/bin/../../support/dsPIC33F/gld \
+  build/default/production/mcc_generated_files/boot/memory_partition.o \
+  build/default/production/mcc_generated_files/boot/boot_demo.o \
+  build/default/production/mcc_generated_files/boot/com_adaptor_uart.o \
+  build/default/production/mcc_generated_files/boot/hardware_alternate_interrupt_table.o \
+  build/default/production/mcc_generated_files/boot/hardware_interrupt_table.o \
+  build/default/production/mcc_generated_files/boot/interrupts.o \
+  build/default/production/mcc_generated_files/boot/boot_verify_not_blank.o \
+  build/default/production/mcc_generated_files/boot/boot_process.o \
+  build/default/production/mcc_generated_files/memory/flash.o \
+  build/default/production/mcc_generated_files/memory/flash_demo.o \
+  build/default/production/mcc_generated_files/reset.o \
+  build/default/production/mcc_generated_files/system.o \
+  build/default/production/mcc_generated_files/traps.o \
+  build/default/production/mcc_generated_files/clock.o \
+  build/default/production/mcc_generated_files/interrupt_manager.o \
+  build/default/production/mcc_generated_files/mcc.o \
+  build/default/production/mcc_generated_files/pin_manager.o \
+  build/default/production/mcc_generated_files/uart1.o \
+  build/default/production/main.o \
+  --local-stack \
+  --defsym=__MPLAB_BUILD=1 \
+  -Tp24EP256GP204.gld.00 \
+  --stack=16 \
+  --check-sections \
+  --data-init \
+  --pack-data \
+  --handles \
+  --isr \
+  --no-gc-sections \
+  --fill-upper=0 \
+  --stackguard=16 \
+  --no-force-link \
+  --smart-io \
+  -Map=dist/default/production/TEZBL.X.production.map \
+  --report-mem \
+  --memorysummary \
+  dist/default/production/memoryfile.xml \
+  -start-group \
+  --library=lega-pic30-elf \
+  --library=m-elf \
+  --library=lega-c-elf \
+  -end-group \
+
+
+Optional library libp24EP256GP204.a not found
+Archive member included because of file (symbol)
+
+/opt/microchip/xc16/v1.60/bin/bin/../../lib/liblega-pic30-elf.a(crt0_extendedep.o)
+                              (__resetPRI)
+/opt/microchip/xc16/v1.60/bin/bin/../../lib/liblega-pic30-elf.a(data_init_extended.o)
+                              /opt/microchip/xc16/v1.60/bin/bin/../../lib/liblega-pic30-elf.a(crt0_extendedep.o) (__data_init_extended)
+/opt/microchip/xc16/v1.60/bin/bin/../../lib/liblega-pic30-elf.a(crt_start_mode_normalep.Leo)
+                              (__crt_start_mode_normal)
+/opt/microchip/xc16/v1.60/bin/bin/../../lib/liblega-c-elf.a(memcpy.EP_eo)
+                              build/default/production/mcc_generated_files/boot/boot_process.o (_memcpy)
+/opt/microchip/xc16/v1.60/bin/bin/../../lib/liblega-c-elf.a(memset.EP_eo)
+                              build/default/production/mcc_generated_files/boot/com_adaptor_uart.o (_memset)
