@@ -9,6 +9,8 @@ Repository for the PSLab Bootloader for performing experiments with the [Pocket 
 
 This repository contains the bootloader for the PSLab board to performing experiments. PSLab is a tiny pocket science lab that provides an array of equipment for doing science and engineering experiments. It can function like an oscilloscope, waveform generator, frequency counter, programmable voltage and current source and also as a data logger. Our website is at https://pslab.io
 
+The bootloader used in this repository is extracted from MPLab Code Configurator (MCC) libraries.
+
 ## Buy
 
 * You can get a Pocket Science Lab device from the [FOSSASIA Shop](https://fossasia.com).
