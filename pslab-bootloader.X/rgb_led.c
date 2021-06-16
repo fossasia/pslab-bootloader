@@ -1,10 +1,12 @@
-#include "rgb_led.h"
+#include <xc.h>
+#include "mcc_generated_files/pin_manager.h"
 
-void Light_RGB(unsigned char red, unsigned char green, unsigned char blue) {
-    unsigned char data[] = {green, red, blue};
-    int location = 0;
-    unsigned char byte = 0;
-    unsigned char bit = 0;
+void Light_RGB(uint8_t red, uint8_t green, uint8_t blue) {
+    
+    uint8_t data[] = {green, red, blue};
+    uint8_t location = 0;
+    uint8_t byte = 0;
+    uint8_t bit = 0;
 
     RGB_LED_SetLow();
 
