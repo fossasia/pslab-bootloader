@@ -1,10 +1,10 @@
-name: pslab-firmware
+name: pslab-bootloader
 
 on:
     push:
-        branches: [ bootloader ]
+        branches: [ main ]
     pull_request:
-        branches: [ bootloader ]
+        branches: [ main ]
 
 jobs:
     build:
@@ -40,22 +40,13 @@ jobs:
 
             - name: Build bootloader
               run: |
-                cd bootloader
                 mkdir build
                 cd build
                 cmake ..
                 make
 
-            - name: Build firmware
-              run: |
-                cd firmware
-                mkdir build
-                cd build
-                cmake ..
-                make
-                
             - name: Publish build files
               uses: actions/upload-artifact@v2
               with:
                 name: production-file
-                path: firmware/build/*.hex
+                path: build/pslab-bootloader.hex
