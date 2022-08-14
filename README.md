@@ -6,7 +6,7 @@ This repository contains the bootloader of the
 ![Build Status](https://github.com/fossasia/pslab-bootloader/actions/workflows/main-builder.yml/badge.svg)
 [![Gitter](https://badges.gitter.im/fossasia/pslab.svg)](https://gitter.im/fossasia/pslab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Mailing List](https://img.shields.io/badge/Mailing%20List-FOSSASIA-blue.svg)](https://groups.google.com/forum/#!forum/pslab-fossasia)
-[![Twitter Follow](https://img.shields.io/twitter/follow/pslabio.svg?style=social&label=Follow&maxAge=259)
+![Twitter Follow](https://img.shields.io/twitter/follow/pslabio.svg?style=social&label=Follow&maxAge=259)
 
 The bootloader makes it possible to flash new firmware to the device over a USB
 connection, whereas without it a special programming tool is required.
