@@ -12,10 +12,13 @@
  * `Read Device Settings` in Unified Bootloader application will switch from
  * main application to bootloader mode where one can flash a new firmware.
  */
+#include <stdbool.h>
+#include <stdint.h>
 
 #include "mcc_generated_files/system.h"
 #include "mcc_generated_files/boot/boot_process.h"
 #include "mcc_generated_files/pin_manager.h"
+#include "mcc_generated_files/uart1.h"
 
 #include "delay.h"
 #include "rgb_led.h"
@@ -33,13 +36,26 @@ int main(void) {
     DELAY_ms(200);
     Light_RGB(32, 8, 16);
 
+    uint32_t post_reset_sequence = 0;
+    // Host may send 4-byte magic number immediately after reset to stay in
+    // bootloader mode.
+    for (uint8_t i = 0; i < sizeof(uint32_t); ++i) {
+        if (UART1_IsRxReady()) {
+            post_reset_sequence |= UART1_Read() << (i * 8);
+        }
+    }
+    bool const magic_match = reset_sequence == 0xDECAFBAD;
+
+    // If the boot pin is grounded (BOOT button pressed on v6), stay in boot.
     BOOT_PIN_SetDigitalOutput();
     BOOT_PIN_SetHigh();
     DELAY_us(1000); // Wait for BOOT to go high.
+    bool const boot_pin_grounded = !BOOT_PIN_GetValue();
 
+    // If no application is detected in program area, stay in boot.
+    bool const app_detected = BOOT_Verify();
 
-    // If BOOT is grounded or no application is detected, stay in bootloader.
-    if (BOOT_PIN_GetValue() && BOOT_Verify()) {
+    if (app_detected && !boot_pin_grounded && !magic_match) {
         BOOT_StartApplication();
     }
 
