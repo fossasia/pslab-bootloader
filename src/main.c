@@ -23,6 +23,9 @@
 #include "delay.h"
 #include "rgb_led.h"
 
+bool received_magic_number(void);
+bool is_boot_btn_pressed(void);
+
 int main(void) {
     // Initialize the device.
     SYSTEM_Initialize();
@@ -36,26 +39,10 @@ int main(void) {
     DELAY_ms(200);
     Light_RGB(32, 8, 16);
 
-    uint32_t post_reset_sequence = 0;
-    // Host may send 4-byte magic number immediately after reset to stay in
-    // bootloader mode.
-    for (uint8_t i = 0; i < sizeof(uint32_t); ++i) {
-        if (UART1_IsRxReady()) {
-            post_reset_sequence |= UART1_Read() << (i * 8);
-        }
-    }
-    bool const magic_match = post_reset_sequence == 0xDECAFBAD;
-
-    // If the boot pin is grounded (BOOT button pressed on v6), stay in boot.
-    BOOT_PIN_SetDigitalOutput();
-    BOOT_PIN_SetHigh();
-    DELAY_us(1000); // Wait for BOOT to go high.
-    bool const boot_pin_grounded = !BOOT_PIN_GetValue();
-
     // If no application is detected in program area, stay in boot.
     bool const app_detected = BOOT_Verify();
 
-    if (app_detected && !boot_pin_grounded && !magic_match) {
+    if (app_detected && !is_boot_btn_pressed() && !received_magic_number()) {
         BOOT_StartApplication();
     }
 
@@ -68,4 +55,37 @@ int main(void) {
     }
 
     return 1;
+}
+
+/**
+ * @brief After reset, host may send magic number stay in bootloader mode.
+ * 
+ * @return bool 
+ */
+bool received_magic_number(void) {
+    uint8_t magic[4] = {0xAD, 0xFB, 0xCA, 0xDE};
+    bool match = true;
+
+    for (uint8_t i = 0; i < 4; ++i) {
+        if (UART1_IsRxReady()) {
+            match = match && (magic[i] == UART1_Read());
+        } else {
+            match = false;
+        }
+    }
+
+    return match;
+}
+
+/**
+ * @brief If the BOOT button is pressed, stay in bootloader mode.
+ * 
+ * @return bool
+ */
+bool is_boot_btn_pressed(void) {
+    BOOT_PIN_SetDigitalOutput();
+    BOOT_PIN_SetHigh();
+    DELAY_us(1000); // Wait for BOOT to go high.
+    return !BOOT_PIN_GetValue();
+
 }
