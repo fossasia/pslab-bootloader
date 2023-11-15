@@ -44,7 +44,7 @@ int main(void) {
             post_reset_sequence |= UART1_Read() << (i * 8);
         }
     }
-    bool const magic_match = reset_sequence == 0xDECAFBAD;
+    bool const magic_match = post_reset_sequence == 0xDECAFBAD;
 
     // If the boot pin is grounded (BOOT button pressed on v6), stay in boot.
     BOOT_PIN_SetDigitalOutput();
