@@ -442,7 +442,7 @@ static enum BOOT_COMMAND_RESULT CalculateChecksum(void)
 
     memcpy(&response, commandArray, sizeof(struct CMD_STRUCT_0));
     
-    if ( IsLegalRange(pCommand->address, pCommand->address+pCommand->dataLength-1))
+    if ( IsLegalRange(pCommand->address, pCommand->address+pCommand->dataLength / 2))
     {
         for (count = 0; count < pCommand->dataLength; count += 4)
         {
