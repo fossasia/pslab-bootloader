@@ -65,10 +65,6 @@ Copyright (c) [2012-2019] Microchip Technology Inc.
 
 #include "boot_config.h"
 
-#ifndef FLASH_ERASE_PAGE_MASK 
-#define FLASH_ERASE_PAGE_MASK  (~((FLASH_ERASE_PAGE_SIZE_IN_INSTRUCTIONS*2) - 1)) 
-#endif
-
 
 #if ((BOOT_CONFIG_MAX_PACKET_SIZE - SIZE_OF_CMD_STRUCT_0) < MINIMUM_WRITE_BLOCK_SIZE )
 #error "The maximum packet size is not large enough to store a full write block plus header. Make the max packet size larger."
