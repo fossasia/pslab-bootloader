@@ -46,7 +46,7 @@ jobs:
                 make
 
             - name: Publish build files
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v7
               with:
                 name: production-file
                 path: build/pslab-bootloader.hex
